@@ -15,8 +15,11 @@ const submitApplication = async (
 
   const application = await prisma.application.create({
     data: {
-      jobId,
-      ...applicationData,
+      job_id: jobId,
+      name: applicationData.name,
+      email: applicationData.email,
+      resume_link: applicationData.resume ?? "",
+      cover_note: applicationData.coverNote ?? "",
     },
   });
   return application;
