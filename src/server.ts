@@ -14,3 +14,5 @@ const main = () => {
     process.exit(1);
   }
 };
+
+main()
