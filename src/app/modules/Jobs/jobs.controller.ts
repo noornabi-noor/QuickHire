@@ -1,44 +1,54 @@
 import { Request, Response } from "express";
 import { jobService } from "./jobs.services";
+import { catchAsync } from "../../shared/catchAsync";
+import { sendResponse } from "../../shared/sendResponse";
 
-const createJob = async (req: Request, res: Response) => {
-  try {
-    const jobData = req.body;
-    const result = await jobService.createJob(jobData);
-    res.status(201).json(result);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
-  }
-};
+const createJob = catchAsync(async (req: Request, res: Response) => {
+  const jobData = req.body;
+  const result = await jobService.createJob(jobData);
 
-const getAllJobs = async (req: Request, res: Response) => {
-  try {
-    const jobs = await jobService.getAllJobs();
-    res.status(200).json(jobs);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
-};
+  sendResponse(res, {
+    httpStatusCode: 201,
+    success: true,
+    message: "Job created successfully",
+    data: result,
+  });
+});
 
-const getJobById = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const job = await jobService.getJobById(id as string);
-    res.status(200).json(job);
-  } catch (error: any) {
-    res.status(404).json({ error: error.message });
-  }
-};
+const getAllJobs = catchAsync(async (req: Request, res: Response) => {
+  const jobs = await jobService.getAllJobs();
 
-const deleteJob = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const deletedJob = await jobService.deleteJob(id as string);
-    res.status(200).json(deletedJob);
-  } catch (error: any) {
-    res.status(404).json({ error: error.message });
-  }
-};
+  sendResponse(res, {
+    httpStatusCode: 200,
+    success: true,
+    message: "Jobs retrieved successfully",
+    data: jobs,
+  });
+});
+
+const getJobById = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const job = await jobService.getJobById(id as string);
+
+  sendResponse(res, {
+    httpStatusCode: 200,
+    success: true,
+    message: "Job retrieved successfully",
+    data: job,
+  });
+});
+
+const deleteJob = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const deletedJob = await jobService.deleteJob(id as string);
+
+  sendResponse(res, {
+    httpStatusCode: 200,
+    success: true,
+    message: "Job deleted successfully",
+    data: deletedJob,
+  });
+});
 
 export const jobController = {
   createJob,
