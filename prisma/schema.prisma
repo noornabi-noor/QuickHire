@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../../src/generated/prisma"
 }
 
 datasource db {
@@ -31,7 +31,7 @@ model Job {
 
 model Application {
   id          String   @id @default(uuid())
-  job_id      String
+  job_id      String  @unique
   name        String
   email       String
   resume_link String
