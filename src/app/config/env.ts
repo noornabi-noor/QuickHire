@@ -11,7 +11,6 @@ interface EnvConfig {
   BETTER_AUTH_SECRET: string;
   BETTER_AUTH_URL: string;
   APP_URL: string;
-  JWT_SECRET: string;
   ADMIN_NAME: string;
   ADMIN_EMAIL: string;
   ADMIN_PASSWORD: string;
@@ -25,7 +24,6 @@ const loadEnvVariables = (): EnvConfig => {
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_URL",
     "APP_URL",
-    "JWT_SECRET",
     "ADMIN_NAME",
     "ADMIN_EMAIL",
     "ADMIN_PASSWORD",
@@ -47,7 +45,6 @@ const loadEnvVariables = (): EnvConfig => {
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET as string,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL as string,
     APP_URL: process.env.APP_URL as string,
-    JWT_SECRET: process.env.JWT_SECRET as string,
     ADMIN_NAME: process.env.ADMIN_NAME as string,
     ADMIN_EMAIL: process.env.ADMIN_EMAIL as string,
     ADMIN_PASSWORD: process.env.ADMIN_PASSWORD as string,

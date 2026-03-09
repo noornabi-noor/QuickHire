@@ -26,9 +26,8 @@ model Job {
   category    String
   description String
   created_at  DateTime @default(now())
+  updated_at     DateTime  @updatedAt
 
-  user_id     String
-  user        User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
   applications Application[]
 
   @@index([title])
@@ -44,6 +43,7 @@ model Application {
   resume_link String
   cover_note  String
   created_at  DateTime @default(now())
+  updated_at     DateTime  @updatedAt
 
   job  Job  @relation(fields: [job_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
@@ -60,13 +60,13 @@ model User {
   email         String
   emailVerified Boolean   @default(false)
   image         String?
+  phone         String?
   role          Role      @default(USER)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
 
-  jobs         Job[]
   applications Application[]
 
   @@unique([email])
