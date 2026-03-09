@@ -29,7 +29,7 @@ model Job {
 
   user_id     String
   user        User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  application Application[]
+  applications Application[]
 
   @@index([title])
   @@map("jobs")
@@ -49,6 +49,7 @@ model Application {
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([job_id])
+  @@index([user_id])
   @@index([email])
   @@map("applications")
 }
